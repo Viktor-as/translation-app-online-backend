@@ -15,6 +15,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/lt", require("./routes/translateToLtRoute"));
 app.use("/api/it", require("./routes/translateToItRoute"));
 
+if (process.env.NODE_ENV === "production") {
+  app.get("/", (req, res) => res.send("The backend is running"));
+}
+
 app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server listening on ${port}`));
